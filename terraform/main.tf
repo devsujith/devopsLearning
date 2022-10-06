@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   profile = "awsadmin"
-  region  = "ap-south-1"
+  region  = "us-east-1"
 }
 
 resource "aws_security_group" "webservers" {
@@ -43,11 +43,11 @@ resource "aws_security_group" "webservers" {
 }
 
 resource "aws_instance" "web001" {
-  count = "5"
+  count = "2"
   ami           = "ami-0851b76e8b1bce90b"
   instance_type = "t2.micro"
   vpc_security_group_ids = [ aws_security_group.webservers.id ]
-  key_name = "ansible-server-b"
+  key_name = "devops"
   tags = {
     Name = "Web-${count.index + 1}"
     type = "webserver"
